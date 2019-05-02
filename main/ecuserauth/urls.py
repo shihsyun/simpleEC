@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from customerauth import views
+from ecuserauth import views
 
 
 urlpatterns = [
@@ -13,6 +13,10 @@ urlpatterns = [
          name='customer_verifycode'),
     path('logout/', views.CustomerLogout,
          name='customer_logout'),
+    path('changepassword/', views.ChangePassword,
+         name='change_password'),
+    path('apply/', views.SellerApply,
+         name='seller_apply'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

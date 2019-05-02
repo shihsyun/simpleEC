@@ -1,12 +1,11 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-from django.utils import timezone
-from .managers import CustomerManager, VerifyCodeManager
+from .managers import ECUserManager, VerifyCodeManager
 from django.conf import settings
 
 
-class Customer(AbstractBaseUser, PermissionsMixin):
+class ECUser(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField('email address', unique=True)
     is_staff = models.BooleanField(default=False)
@@ -16,7 +15,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    objects = CustomerManager()
+    objects = ECUserManager()
 
     def __str__(self):
         return self.name

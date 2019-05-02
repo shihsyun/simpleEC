@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'customerauth'
+    'django_logging',
+    'ecuserauth',
+    'ecproduct',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_logging.middleware.DjangoLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -156,4 +159,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'customerauth.Customer'
+AUTH_USER_MODEL = 'ecuserauth.ECUser'
+
+DJANGO_LOGGING = {
+    'CONSOLE_LOG': False
+}

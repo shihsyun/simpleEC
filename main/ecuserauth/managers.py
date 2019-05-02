@@ -1,13 +1,13 @@
 import secrets
-import datetime
-import pytz
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils import timezone
 from datetime import timedelta
+from django.contrib.auth.models import Group
+from django.utils.translation import ugettext_lazy as _
 
 
-class CustomerManager(BaseUserManager):
+class ECUserManager(BaseUserManager):
 
     """
     User model manager where emial is the unique identifiers for authentication instead of usernames.
@@ -19,16 +19,19 @@ class CustomerManager(BaseUserManager):
         """
 
         if not email:
-            raise ValueError('ENTER AN EMAIL BUDDY')
+            raise ValueError(_('ENTER AN EMAIL BUDDY'))
 
         if not password:
-            raise ValueError('ENTER A PASSWORD BUDDY')
+            raise ValueError(_('ENTER A PASSWORD BUDDY'))
 
         email = self.normalize_email(email)
         kwargs.setdefault('is_active', False)
         user = self.model(email=email, password=password, **kwargs)
         user.set_password(password)
         user.save()
+
+        group = Group.objects.get(name='Customer')
+        user.groups.add(group)
 
         return user
 
@@ -37,7 +40,8 @@ class VerifyCodeManager(models.Manager):
 
     def create_verify_code(self, user):
         code = secrets.token_urlsafe(30)
-        super(VerifyCodeManager, self).get_queryset().filter(user=user).delete()
+        super(VerifyCodeManager, self).get_queryset().filter(
+            user=user).delete()
         verifycode = self.model(user=user, code=code)
         verifycode.save()
         user.is_active = False
