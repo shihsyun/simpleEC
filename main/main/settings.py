@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '26_^hyte5k_2=g@0aeu8xtvoiaat#g!rcvm6#9jfgu5o6#3u0&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_logging',
     'ecuserauth',
     'ecproduct',
+    'ecorder',
 ]
 
 MIDDLEWARE = [

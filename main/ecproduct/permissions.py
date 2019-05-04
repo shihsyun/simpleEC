@@ -8,10 +8,12 @@ class ProductCompositionPermission(permissions.BasePermission):
     def has_permission(self, request, view):
 
         if request.method == 'GET':
-            return request.user.has_perm('ecproduct.onlyread')
+            if 'ecproduct.view_product' in request.user.get_group_permissions():
+                return True
 
         if request.method == 'POST':
-            return request.user.has_perm('ecproduct.can_create')
+            if 'ecproduct.add_product' in request.user.get_group_permissions():
+                return True
 
         if request.method in ['DELETE', 'PUT']:
             obj = get_object_or_404(

@@ -1,7 +1,9 @@
 from django.db import models
-# from .managers import ProductManager
 from django.conf import settings
-# Create your models here.
+
+"""
+Product's model.
+"""
 
 
 class Product(models.Model):
@@ -17,11 +19,6 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['created_at']
-        permissions = (
-            ('onlyread', 'onlyread'),
-            ('can_create', 'can_create'),
-            ('readwrite', 'readwrite'),
-        )
 
     def __str__(self):
         return self.title
