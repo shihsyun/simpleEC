@@ -1,3 +1,4 @@
+<pre>
 use DRF to provide EC function, include register, order.
 
 User Story as below
@@ -98,3 +99,4 @@ example as below
 	  }
     DELETE http://127.0.0.1:8000/order/1/
     Output HTTP_204_NO_CONTENT
+</pre>
